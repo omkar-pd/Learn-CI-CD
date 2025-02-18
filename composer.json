@@ -1,5 +1,7 @@
 {
     "name": "omkar-pd/learn-ci-cd",
+    "description": "A test repository to learn GitHub Actions CI/CD",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "OmkarPd\\LearnCiCd\\": "src/"
