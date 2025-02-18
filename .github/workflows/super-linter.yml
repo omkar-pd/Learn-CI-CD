@@ -1,4 +1,4 @@
-name: ESLint CI
+name: ESLint and PHPCS CI
 
 on:
   push:
@@ -22,3 +22,35 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
+
+  phpcs:
+    name: PHP coding standard checks
+      runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup PHP 8.1
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: |
+          composer validate
+          composer install --no-progress --no-suggest --prefer-dist
+
+      - name: Run PHPCS Checks
+        run: |
+          echo "Running PHPCS..."
+          vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,yml --encoding=utf-8 -p index.php
