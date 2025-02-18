@@ -1,0 +1,25 @@
+{
+    "name": "omkar-pd/learn-ci-cd",
+    "autoload": {
+        "psr-4": {
+            "OmkarPd\\LearnCiCd\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "omkar-pd",
+            "email": "omkarpd109@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*"
+    },
+    "require": {
+        "drupal/coder": "^8.3"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
